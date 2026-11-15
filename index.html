@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8e9ed">
+<title>Un pequeño mundo para Génesis 🐼</title>
+<style>
+:root{--pink:#f5cbd6;--rose:#df8fa7;--ink:#55434a;--cream:#fffaf6;--mint:#dceee5;--lilac:#e8e0f4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family: "Trebuchet MS",Arial,sans-serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.hero{min-height:100svh;position:relative;display:grid;place-items:center;text-align:center;padding:36px 18px 70px;overflow:hidden;background:radial-gradient(circle at 20% 20%,#fff 0 8%,transparent 9%),linear-gradient(145deg,#fff7f3,#f9e1e8 55%,#eee7f6)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:#fff8;filter:blur(1px)}
+.hero:before{width:280px;height:280px;left:-110px;bottom:-90px}.hero:after{width:220px;height:220px;right:-75px;top:-55px}
+.sparkle{position:absolute;color:#fff;font-size:22px;animation:twinkle 2.5s infinite alternate}
+.s1{top:16%;left:13%}.s2{top:28%;right:12%;animation-delay:.7s}.s3{bottom:20%;right:18%;animation-delay:1.2s}
+@keyframes twinkle{to{transform:scale(.55) rotate(35deg);opacity:.35}}
+.hero-inner{position:relative;z-index:2;max-width:760px}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;color:#a86f82;font-weight:bold}
+h1{font-family:Georgia,serif;font-weight:normal;font-size:clamp(2.7rem,8vw,5.5rem);line-height:1.02;margin:15px 0;color:#76505e}
+h1 span{color:#d78ca4;font-style:italic}
+.subtitle{font-size:clamp(1rem,2.5vw,1.2rem);line-height:1.7;max-width:570px;margin:0 auto 25px;color:#765f67}
+.panda-wrap{width:190px;height:190px;margin:0 auto 20px;position:relative;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.panda{width:160px;height:145px;position:absolute;left:15px;top:28px;background:#fff;border-radius:48% 48% 45% 45%;box-shadow:0 12px 25px #a77d8b2a;border:2px solid #f2e5e8}
+.ear{position:absolute;width:57px;height:57px;background:#343039;border-radius:50%;top:-19px;z-index:-1}.ear.left{left:4px}.ear.right{right:4px}
+.patch{position:absolute;width:37px;height:49px;background:#343039;border-radius:50%;top:48px}.patch.left{left:29px;transform:rotate(24deg)}.patch.right{right:29px;transform:rotate(-24deg)}
+.eye{position:absolute;width:8px;height:11px;background:white;border-radius:50%;top:17px;left:14px}
+.nose{position:absolute;top:76px;left:72px;width:16px;height:11px;background:#343039;border-radius:50% 50% 60% 60%}
+.mouth{position:absolute;top:87px;left:77px;width:7px;height:9px;border-right:2px solid #343039;border-bottom:2px solid #343039;border-radius:0 0 8px}
+.blush{position:absolute;top:88px;width:19px;height:10px;border-radius:50%;background:#f4b7c5;opacity:.8}.blush.l{left:19px}.blush.r{right:19px}
+.bow{position:absolute;right:12px;top:8px;color:#d77f9c;font-size:34px;transform:rotate(18deg)}
+.panda-heart{position:absolute;right:-2px;bottom:17px;font-size:38px;animation:heartbeat 1.3s infinite}
+@keyframes heartbeat{50%{transform:scale(1.22)}}
+.btn{border:0;border-radius:999px;padding:14px 23px;background:#d98da5;color:white;box-shadow:0 8px 18px #c9879b40;transition:.2s;font-weight:bold}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 22px #c9879b55}
+.btn.secondary{background:#fff;color:#a96d82;border:1px solid #efd0da;box-shadow:none}
+.music-note{font-size:.82rem;color:#987b84;margin-top:13px}
+main{max-width:1000px;margin:auto;padding:70px 20px}
+.section-title{text-align:center;font:normal clamp(2rem,5vw,3rem) Georgia,serif;color:#805968;margin:0 0 12px}
+.section-sub{text-align:center;color:#927b83;margin:0 auto 34px;max-width:560px;line-height:1.6}
+.note-card{max-width:720px;margin:0 auto;background:#fff;border:1px solid #f2e2e7;border-radius:28px;padding:clamp(25px,5vw,48px);box-shadow:0 18px 45px #8f64700e;text-align:center;position:relative}
+.note-card:before{content:"♡";position:absolute;top:12px;left:22px;color:#e5a8ba;font-size:25px}
+.note-card p{font:1.12rem/1.9 Georgia,serif;color:#6c5860;margin:0}
+.signature{margin-top:20px;color:#c27d94;font-style:italic}
+.garden{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:35px}
+.tile{background:#fff;border:1px solid #f0e3e8;border-radius:22px;padding:25px 22px;text-align:center;transition:.25s;box-shadow:0 8px 22px #76505e0a}
+.tile:hover{transform:translateY(-6px) rotate(-.5deg)}
+.tile .emoji{font-size:2.4rem;display:block;margin-bottom:12px}
+.tile h3{font:normal 1.35rem Georgia,serif;color:#805968;margin:0 0 9px}
+.tile p{font-size:.94rem;line-height:1.65;color:#806f75;margin:0}
+.interactive{background:linear-gradient(130deg,#f8e8ed,#f0ebf8);border-radius:30px;padding:45px 20px;text-align:center;margin:70px 0}
+.heart-field{min-height:125px;display:flex;justify-content:center;align-items:center;gap:13px;flex-wrap:wrap;margin:15px auto}
+.tap-heart{border:0;background:transparent;font-size:38px;transition:.2s;filter:drop-shadow(0 4px 5px #b77d8c22)}
+.tap-heart:hover{transform:scale(1.3) rotate(10deg)}
+#heartMessage{min-height:30px;color:#986779;font:italic 1.1rem Georgia,serif}
+.gift-area{margin:65px auto 20px;text-align:center}
+.gift{font-size:76px;border:0;background:transparent;filter:drop-shadow(0 8px 8px #b88b9b33);transition:.25s}
+.gift:hover{transform:scale(1.12) rotate(-7deg)}
+#giftMessage{max-width:600px;margin:18px auto 0;line-height:1.8;color:#765f67;min-height:58px}
+footer{text-align:center;padding:28px 16px 42px;color:#a68b94;font-size:.86rem}
+.float-heart{position:fixed;bottom:-30px;z-index:10;pointer-events:none;animation:floatUp 4s linear forwards}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+.audio-pill{position:fixed;right:16px;bottom:16px;z-index:20;background:#fff;border:1px solid #efd9e0;border-radius:999px;padding:10px 14px;box-shadow:0 6px 20px #76505e20;color:#8b6070;font-size:.85rem}
+.audio-pill button{border:0;background:none;color:inherit;font-weight:bold}
+@media(max-width:520px){main{padding:55px 16px}.interactive{margin:55px 0}.panda-wrap{transform:scale(.9)}}
+</style>
+</head>
+<body>
+<audio id="bgMusic" src="musica.mp3" loop preload="auto"></audio>
+
+<section class="hero">
+  <span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✦</span>
+  <div class="hero-inner">
+    <div class="eyebrow">un rinconcito hecho con cariño</div>
+    <div class="panda-wrap" aria-label="Panda tierno">
+      <div class="panda"><div class="ear left"></div><div class="ear right"></div>
+        <div class="patch left"><i class="eye"></i></div><div class="patch right"><i class="eye"></i></div>
+        <div class="blush l"></div><div class="blush r"></div><div class="nose"></div><div class="mouth"></div>
+      </div><div class="bow">🎀</div><div class="panda-heart">💗</div>
+    </div>
+    <h1>Hola, <span>Génesis</span></h1>
+    <p class="subtitle">A veces, un encuentro inesperado puede regalarle un poquito de magia a un día cualquiera. Este pequeño mundo es para ti. 🐼</p>
+    <button class="btn" onclick="startExperience()">Entrar a este mundito ♡</button>
+    <div class="music-note" id="musicHint">♪ Preparé una melodía para acompañar este momento</div>
+  </div>
+</section>
+
+<main>
+  <h2 class="section-title">Un detalle para ti</h2>
+  <p class="section-sub">No hacen falta grandes razones para tener un gesto bonito. A veces basta con querer sacarle una sonrisa a alguien.</p>
+  <article class="note-card">
+    <p>Génesis, ayer tuve la suerte de conocerte y hoy quise dejarte este pequeño detalle. No pretende ser algo enorme ni apresurar nada; simplemente quería regalarte una sonrisa y decirte que me pareció bonito coincidir contigo. Que nunca te falten motivos para sonreír, sueños que te emocionen y personas que te traten con mucho cariño.</p>
+    <div class="signature">Con una sonrisa, para ti. ♡</div>
+  </article>
+
+  <section style="padding-top:75px">
+    <h2 class="section-title">Pequeñas cositas bonitas</h2>
+    <p class="section-sub">Como este panda, que vino a recordarte tres cosas importantes.</p>
+    <div class="garden">
+      <div class="tile"><span class="emoji">🌷</span><h3>Que sonrías mucho</h3><p>Porque una sonrisa tuya puede hacer más bonito un día normal.</p></div>
+      <div class="tile"><span class="emoji">☁️</span><h3>Que tengas calma</h3><p>Incluso en los días grises, mereces tranquilidad y cosas bonitas.</p></div>
+      <div class="tile"><span class="emoji">⭐</span><h3>Que sigas brillando</h3><p>A tu manera, a tu ritmo y sin dejar de ser esa persona especial que eres.</p></div>
+    </div>
+  </section>
+
+  <section class="interactive">
+    <h2 class="section-title">Un poquito de cariño interactivo</h2>
+    <p class="section-sub" style="margin-bottom:10px">Toca los corazoncitos. Cada uno guarda un mensajito para ti.</p>
+    <div class="heart-field">
+      <button class="tap-heart" aria-label="Mensaje uno" onclick="showHeart(0)">💗</button>
+      <button class="tap-heart" aria-label="Mensaje dos" onclick="showHeart(1)">💖</button>
+      <button class="tap-heart" aria-label="Mensaje tres" onclick="showHeart(2)">💕</button>
+      <button class="tap-heart" aria-label="Mensaje cuatro" onclick="showHeart(3)">💘</button>
+      <button class="tap-heart" aria-label="Mensaje cinco" onclick="showHeart(4)">💝</button>
+    </div>
+    <div id="heartMessage" aria-live="polite">Elige un corazón, Génesis ♡</div>
+  </section>
+
+  <section class="gift-area">
+    <h2 class="section-title">Pssst… hay una sorpresa</h2>
+    <p class="section-sub">El panda encontró una cajita y dice que es solo para ti.</p>
+    <button class="gift" id="giftButton" onclick="openGift()" aria-label="Abrir regalo">🎁</button>
+    <div id="giftMessage" aria-live="polite">Toca la cajita para descubrir tu mensajito secreto.</div>
+  </section>
+</main>
+
+<footer>Hecho con ternura, un panda y un poquito de imaginación. 🐼♡</footer>
+
+<div class="audio-pill">♫ <button id="musicToggle" onclick="toggleMusic()">Activar música</button></div>
+
+<script>
+const audio = document.getElementById('bgMusic');
+const hint = document.getElementById('musicHint');
+const messages = [
+  'Ojalá hoy encuentres una razón nueva para sonreír. 🌷',
+  'Nunca olvides lo valiosa que eres. ✨',
+  'Que la vida te sorprenda con momentos preciosos. 🦋',
+  'Este panda te manda un abrazo tamaño gigante. 🐼',
+  'Qué bonito que nuestros caminos se hayan cruzado. 💞'
+];
+let giftOpened = false;
+
+async function playMusic(){
+  try{
+    await audio.play();
+    document.getElementById('musicToggle').textContent='Pausar música';
+    hint.textContent='♪ La melodía ya está sonando para ti';
+  }catch(e){
+    document.getElementById('musicToggle').textContent='Activar música';
+    hint.textContent='♪ Toca “Entrar” o “Activar música” para escuchar la melodía';
+  }
+}
+function startExperience(){
+  playMusic();
+  document.querySelector('.note-card').scrollIntoView({behavior:'smooth',block:'center'});
+  burstHearts(12);
+}
+function toggleMusic(){
+  if(audio.paused) playMusic();
+  else{audio.pause();document.getElementById('musicToggle').textContent='Reanudar música';}
+}
+function showHeart(i){
+  document.getElementById('heartMessage').textContent=messages[i];
+  burstHearts(3);
+}
+function openGift(){
+  const box=document.getElementById('giftMessage');
+  const button=document.getElementById('giftButton');
+  if(!giftOpened){
+    giftOpened=true;button.textContent='💝';
+    box.innerHTML='Sorpresa, Génesis: <strong>¡te mando un abrazo enorme!</strong> Que este sea el primero de muchos días llenos de cosas bonitas. Y si este detalle consiguió dibujarte una sonrisa, misión cumplida. ♡';
+    burstHearts(22);
+  }else{
+    box.textContent='El regalito sigue siendo tuyo. Nunca está de más recordarte que mereces cosas bonitas. 💗';
+    burstHearts(8);
+  }
+}
+function burstHearts(count){
+  const symbols=['💗','💕','♡','💖','✨'];
+  for(let i=0;i<count;i++){
+    const el=document.createElement('span');
+    el.className='float-heart';el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    el.style.left=(Math.random()*94+3)+'vw';
+    el.style.fontSize=(16+Math.random()*22)+'px';
+    el.style.animationDuration=(3+Math.random()*2)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),5200);
+  }
+}
+// Los navegadores pueden bloquear el audio automático hasta que la persona interactúe.
+window.addEventListener('load',()=>{playMusic();});
+</script>
+</body>
+</html>
